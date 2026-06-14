@@ -1,0 +1,298 @@
+/* ==============================================
+   @font-face — Fontes locais (Work Sans Variable)
+   ============================================== */
+@font-face {
+    font-family: 'Work Sans';
+    src: url('../fonts/WorkSans-Italic-VariableFont_wght.ttf') format('truetype-variations');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Work Sans';
+    src: url('../fonts/static/WorkSans-Italic-VariableFont_wght.ttf') format('truetype-variations');
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* ==============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================== */
+:root {
+    --white: hsl(0, 0%, 100%);
+    --purple-100: hsl(275, 100%, 97%);
+    --purple-600: hsl(292, 16%, 49%);
+    --purple-950: hsl(292, 42%, 14%);
+    --transition-speed: 0.3s;
+}
+
+/* ==============================================
+   Reset & Base
+   ============================================== */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;
+}
+
+body {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--purple-950);
+    background: linear-gradient(
+        180deg,
+        hsl(292, 70%, 20%) 0%,
+        hsl(292, 42%, 25%) 35%,
+        var(--purple-100) 35%,
+        var(--purple-100) 100%
+    );
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem 1.5rem;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* ==============================================
+   Background Pattern (SVG local)
+   ============================================== */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 320px;
+    background-image: url('../images/background-pattern-desktop.svg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ==============================================
+   FAQ Wrapper & Card
+   ============================================== */
+.faq-wrapper {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 1.5rem;
+}
+
+.faq-card {
+    background: var(--white);
+    border-radius: 1rem;
+    padding: 2.5rem 2.5rem 1.5rem;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.15),
+        0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* ==============================================
+   FAQ Header
+   ============================================== */
+.faq-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.faq-header .star-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+
+.faq-header h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--purple-950);
+    line-height: 1;
+}
+
+/* ==============================================
+   FAQ List & Items
+   ============================================== */
+.faq-list {
+    list-style: none;
+}
+
+.faq-item {
+    border-bottom: 1px solid var(--purple-100);
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+}
+
+/* ==============================================
+   FAQ Question Button
+   ============================================== */
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 1.5rem 0;
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--purple-950);
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    line-height: 1.3;
+    transition: color var(--transition-speed) ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Hover state */
+.faq-question:hover {
+    color: hsl(292, 60%, 40%);
+}
+
+/* Focus state (keyboard navigation) */
+.faq-question:focus-visible {
+    outline: 3px solid hsl(292, 60%, 50%);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Quando o item está aberto, reduz o padding inferior */
+.faq-item.open .faq-question {
+    padding-bottom: 0.5rem;
+}
+
+/* ==============================================
+   FAQ Icon (Plus/Minus via <img>)
+   ============================================== */
+.faq-icon {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    display: block;
+}
+
+/* ==============================================
+   FAQ Answer (Collapse Animation)
+   ============================================== */
+.faq-answer-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--transition-speed) ease;
+}
+
+.faq-item.open .faq-answer-wrapper {
+    grid-template-rows: 1fr;
+}
+
+.faq-answer-inner {
+    overflow: hidden;
+}
+
+.faq-answer {
+    color: var(--purple-600);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    padding-bottom: 1.5rem;
+    padding-right: 3rem;
+}
+
+/* ==============================================
+   Responsive: Tablets & Phones (≤ 600px)
+   ============================================== */
+@media (max-width: 600px) {
+    /* Troca para o background pattern mobile */
+    body::before {
+        height: 232px;
+        background-image: url('../images/background-pattern-mobile.svg');
+    }
+
+    body {
+        padding: 1rem 1rem;
+        align-items: flex-start;
+    }
+
+    .faq-wrapper {
+        margin-top: 0.5rem;
+    }
+
+    .faq-card {
+        padding: 1.5rem 1.25rem 0.75rem;
+        border-radius: 0.75rem;
+    }
+
+    .faq-header {
+        gap: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .faq-header .star-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .faq-header h1 {
+        font-size: 2rem;
+    }
+
+    .faq-question {
+        font-size: 1rem;
+        padding: 1.25rem 0;
+        gap: 1rem;
+    }
+
+    .faq-icon {
+        width: 26px;
+        height: 26px;
+    }
+
+    .faq-answer {
+        padding-right: 0;
+        font-size: 0.95rem;
+    }
+
+    .faq-item.open .faq-question {
+        padding-bottom: 0.25rem;
+    }
+}
+
+/* ==============================================
+   Responsive: Telas muito pequenas (≤ 375px)
+   ============================================== */
+@media (max-width: 375px) {
+    .faq-card {
+        padding: 1.25rem 1rem 0.5rem;
+    }
+
+    .faq-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .faq-question {
+        font-size: 0.95rem;
+    }
+
+    .faq-answer {
+        font-size: 0.9rem;
+    }
+}
